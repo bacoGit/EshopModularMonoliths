@@ -1,6 +1,8 @@
+using Catalog.Products.Events;
+
 namespace Catalog.Products.Models;
 
-public class Product : Entity<Guid>
+public class Product : Aggregate<Guid>
 {
     public string Name { get; private set; } = default!;
     public List<string> Category { get; private set; } = new();
@@ -13,7 +15,7 @@ public class Product : Entity<Guid>
     {
         ValidateNameAndPrice(name, price);
 
-        return new Product
+        var product = new Product
         {
             Id = id,
             Name = name,
@@ -22,6 +24,10 @@ public class Product : Entity<Guid>
             Price = price,
             ImageFile = imageFile
         };
+
+        product.AddDomainEvent(new ProductCreatedEvent(product));
+
+        return product;
     }
 
     // Update method for modifying product details
@@ -32,10 +38,13 @@ public class Product : Entity<Guid>
         Name = name;
         Category = category;
         Description = description;
-        Price = price;
         ImageFile = imageFile;
 
-        // TODO: if price has changed, raise a ProductPriceChanged domain event
+        if (Price != price)
+        {
+            Price = price;
+            AddDomainEvent(new ProductPriceChangedEvent(this));
+        }
     }
 
     private static void ValidateNameAndPrice(string name, decimal price)
