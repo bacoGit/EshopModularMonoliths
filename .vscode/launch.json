@@ -1,0 +1,19 @@
+{
+    // Use IntelliSense para saber los atributos posibles.
+    // Mantenga el puntero para ver las descripciones de los existentes atributos.
+    // Para más información, visite: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": ".NET Api project",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceRoot}/src/Boos¡tstrapper/Api/bin/Debug/net9.0/Api.dll",
+            "args": [],
+            "cwd": "${workspaceRoot}/Api",
+            "stopAtEntry": false,
+            "console": "internalConsole"
+        }
+    ]
+}

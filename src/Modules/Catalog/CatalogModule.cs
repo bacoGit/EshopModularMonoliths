@@ -9,11 +9,16 @@ public static class CatalogModule
     public static IServiceCollection AddCatalogModule(this IServiceCollection services,
         IConfiguration configuration)
     {
-        // TODO: Add your services to the container here
-        // services
-        //     .AddApplicationServices()
-        //     .AddInfrastructureServices(configuration)
-        //     .AddApiServices(configuration)
+        // Add your services to the container here
+        // Api Endpoint services
+
+        // Application Use Case services
+
+        // Data - Infrastructure services
+        var connectionString = configuration.GetConnectionString("Database");
+
+        services.AddDbContext<Catalog.Data.CatalogDbContext>(options =>
+            options.UseNpgsql(connectionString));
 
         return services;
     }

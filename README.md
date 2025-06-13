@@ -14,3 +14,9 @@ Use Shared project to instal these:
 - dotnet add package Microsoft.EntityFrameworkCore.Design
 - dotnet add package Microsoft.EntityFrameworkCore.Tools
 - dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL --version 9.0.4
+  
+# To run Migrations
+
+- dotnet ef migrations add InitialCreate
+  - dotnet ef --startup-project ../../Bootstrapper/Api/Api.csproj migrations add InitialCreate --output-dir ./Data/Migrations --project ./Catalog.csprojs
+- dotnet ef database update
